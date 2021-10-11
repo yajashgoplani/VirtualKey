@@ -1,5 +1,6 @@
 package com.LockedMe.entities;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.io.File;
 import java.nio.file.FileSystems;
@@ -26,7 +27,6 @@ public class Directory {
     }
 
     public ArrayList<File> fillFiles() {
-    	System.out.println(path);
         File[] directoryFiles = Dfiles.listFiles();        
     	files.clear();
     	for (int i = 0; i < directoryFiles.length; i++) {
@@ -34,20 +34,41 @@ public class Directory {
     			files.add(directoryFiles[i]);
     		}
     	}
-    	
-    	Collections.sort(files);
-    	
     	return files;
     }
 
     public ArrayList<File> getFiles() {
     	
     	fillFiles();
-    	return files;
+    	//Sorting List in descending order using insertion sort (That can also be done using Collections.sort(merge Sort))
+    	File file[]=sortFiles(files);
+    	ArrayList<File> sortedFiles= new ArrayList<File>();
+    	for(File f:file)
+    		sortedFiles.add(f);
+    	return sortedFiles;
     }
     
-    
-    public void mergeSort() {
+    public File [] sortFiles(ArrayList<File> file)
+    {
+    	File f[]=new File[file.size()];
+    	int i=0;
+    	for(File m:files) {
+    		f[i]=m;
+    		i++;
+    	}	
+    	 int n = file.size();
+         for (i = 1; i < n; ++i) {
+             File key = f[i];
+             int j = i - 1;
+             while (j >= 0 && (f[j].getName().compareToIgnoreCase(key.getName())<0)) {
+                 f[j + 1] = f[j];
+                 j = j - 1;
+             }
+            f[j + 1] = key;
+         }
+        return f;
+    }
+    public void SortFiles() {
     	
     }
     

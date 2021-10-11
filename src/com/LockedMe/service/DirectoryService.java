@@ -12,11 +12,12 @@ public class DirectoryService {
     public static void PrintFiles() {
     	
     	fileDirectory.fillFiles();
-
+    	System.out.println();
         for (File file : DirectoryService.getFileDirectory().getFiles())
         {
             System.out.println(file.getName());
         }
+        System.out.println();
     }
     public static Directory getFileDirectory() {
         return fileDirectory;
